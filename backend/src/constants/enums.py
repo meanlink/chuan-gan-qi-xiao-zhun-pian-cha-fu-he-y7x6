@@ -8,3 +8,17 @@ class JobStatus(str, Enum):
     running = 'running'
     completed = 'completed'
     failed = 'failed'
+class HoldbackStatus(str, Enum):
+    sealed = 'sealed'
+    in_use = 'in_use'
+    consumed = 'consumed'
+class CaseStatus(str, Enum):
+    open = 'open'
+    locked = 'locked'
+    queued = 'queued'
+    running = 'running'
+    completed = 'completed'
+    failed = 'failed'
+class Verdict(str, Enum):
+    released = 'released'
+    rejected = 'rejected'

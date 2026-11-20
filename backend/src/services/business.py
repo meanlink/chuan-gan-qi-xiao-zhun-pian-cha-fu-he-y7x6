@@ -24,6 +24,17 @@ def seed_records():
     return rows
 
 
+def seed_holdback_records():
+    # 演示留样：与普通批不同的测量编号段，三温区各 20 对，固定随机种子可复现。
+    rng = random.Random(2026)
+    rows = []
+    for band, center, bias, sigma in [("低温", -10, -.05, .13), ("常温", 25, .19, .11), ("高温", 70, .6, .21)]:
+        for i in range(20):
+            ref = center + rng.uniform(-3, 3)
+            rows.append({"sample": f"T24-留样-{band}-{i+1:03}", "band": band, "reference": round(ref, 4), "measured": round(ref + bias + rng.gauss(0, sigma), 4)})
+    return rows
+
+
 def analyze(records, params):
     try:
         offset = float(params.get("offset", 0))
